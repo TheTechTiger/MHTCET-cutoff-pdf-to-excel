@@ -1,96 +1,96 @@
-Sr. No.,College Code,College Name,Course Code,Course Name,Status,Level,Stage,Caste_Category,Cutoff Rank,Cutoff Percentile
-1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GOPENS,34240,88.5013511
-2,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GSCS,62739,77.8445199
-3,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GSTS,91124,65.8812284
-4,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GVJS,54224,81.2928705
-5,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GNT1S,34281,88.4426131
-6,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GNT2S,41658,85.7455441
-7,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GNT3S,35923,87.8945473
-8,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GOBCS,42649,85.3822102
-9,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GSEBCS,69130,75.3516004
-10,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LOPENS,35071,88.1228442
-11,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LSCS,47557,83.6393990
-12,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LSTS,89332,66.8505265
-13,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LVJS,54046,81.3738935
-14,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LNT2S,80230,70.8722936
-15,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LOBCS,47396,83.6467428
-16,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LSEBCS,112136,55.2318816
-17,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDOPENS,115494,53.7694785
-18,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDOBCS,153595,27.6622718
-19,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFOPENS,88930,67.0458361
-20,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFOBCS,124882,47.9842799
-21,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,TFWS,41891,85.5352459
-22,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDROBC,155782,25.6482713
-23,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,SDEFRSEBC,120638,50.6340761
-24,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,SEWS,90204,66.1855163
-25,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GOPENS,7872,97.3911937
-26,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GSCS,17571,94.1713006
-27,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GSTS,56026,80.5896708
-28,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GVJS,17052,94.3331807
-29,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GNT1S,16746,94.4433332
-30,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GNT2S,16443,94.5541467
-31,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GOBCS,8931,97.0436452
-32,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GSEBCS,15942,94.6903844
-33,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LOPENS,9308,96.9066937
-34,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LSCS,15485,94.8376426
-35,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LSTS,45930,84.2430574
-36,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LNT1S,20457,93.2139295
-37,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LNT3S,23863,92.0214155
-38,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LOBCS,9823,96.7545639
-39,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LSEBCS,15409,94.8397684
-40,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDOPENS,33711,88.6037289
-41,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDOBCS,49777,82.7778711
-42,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFOPENS,27598,90.7773660
-43,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFOBCS,36001,87.8152279
-44,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,TFWS,5518,98.1177725
-45,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDRSCS,46875,83.7529730
-46,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFROBCS,31634,89.3071786
-47,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,ORPHAN,40407,86.1764583
-48,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,EWS,13851,95.3932298
-49,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,GOPENS,12001,96.0264086
-50,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,GSCS,22810,92.4262209
-51,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,GSTS,57428,80.0615027
-52,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,GVJS,22090,92.6351162
-53,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,GNT1S,22548,92.5251996
-54,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,GNT2S,18106,93.9913601
-55,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,GNT3S,17692,94.1151780
-56,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,GOBCS,12727,95.8067495
-57,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,GSEBCS,18460,93.8710080
-58,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,LOPENS,11632,96.1687682
-59,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,LSCS,22774,92.4273158
-60,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,LSTS,62455,78.1496564
-61,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,LNT2S,20674,93.1131822
-62,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,LOBCS,12683,95.8198477
-63,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,LSEBCS,19600,93.4764585
-64,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDOPENS,84120,69.2652564
-65,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDOBCS,109674,57.0470967
-66,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFOPENS,33941,88.5539410
-67,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFOBCS,51336,82.1878954
-68,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,TFWS,9964,96.7229568
-69,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDRSCS,87457,67.6869909
-70,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFRNT1S,37872,87.1012785
-71,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,ORPHAN,100069,61.6354671
-72,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,EWS,18299,93.9032684
-73,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GOPENS,28736,90.3847828
-74,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GSCS,42636,85.3822102
-75,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GSTS,109844,57.0470967
-76,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GVJS,40155,86.2190813
-77,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GNT2S,43440,85.1704164
-78,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GNT3S,64967,76.9332320
-79,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GOBCS,30164,89.8747850
-80,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GSEBCS,47938,83.5369475
-81,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LOPENS,25978,91.2954950
-82,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LSCS,50448,82.7086811
-83,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LSTS,107619,57.4142590
-84,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LVJS,43053,85.2662319
-85,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LNT1S,34017,88.5172385
-86,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LOBCS,30050,89.8755527
-87,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LSEBCS,61280,78.4507504
-88,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDOPENS,126496,47.0113809
-89,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDOBCS,153875,27.5123271
-90,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFOPENS,48986,83.0327460
-91,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFOBCS,164128,18.5574725
-92,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,TFWS,27443,90.8058519
-93,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFROBCS,82621,69.8003760
-94,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,ORPHAN,80761,70.5215521
-95,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,EWS,49718,82.7820291
+Sr. No.,Page Number,College Code,College Name,Course Code,Course Name,Status,Level,Stage,Caste_Category,Cutoff Rank,Cutoff Percentile
+1,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GOPENS,34240,88.5013511
+2,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GSCS,62739,77.8445199
+3,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GSTS,91124,65.8812284
+4,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GVJS,54224,81.2928705
+5,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GNT1S,34281,88.4426131
+6,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GNT2S,41658,85.7455441
+7,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GNT3S,35923,87.8945473
+8,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GOBCS,42649,85.3822102
+9,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GSEBCS,69130,75.3516004
+10,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LOPENS,35071,88.1228442
+11,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LSCS,47557,83.6393990
+12,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LSTS,89332,66.8505265
+13,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LVJS,54046,81.3738935
+14,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LNT2S,80230,70.8722936
+15,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LOBCS,47396,83.6467428
+16,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LSEBCS,112136,55.2318816
+17,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDOPENS,115494,53.7694785
+18,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDOBCS,153595,27.6622718
+19,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFOPENS,88930,67.0458361
+20,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFOBCS,124882,47.9842799
+21,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,TFWS,41891,85.5352459
+22,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDROBC,155782,25.6482713
+23,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,SDEFRSEBC,120638,50.6340761
+24,1,01002,"Government College of Engineering, Amravati",0100219110,Civil Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,SEWS,90204,66.1855163
+25,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GOPENS,7872,97.3911937
+26,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GSCS,17571,94.1713006
+27,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GSTS,56026,80.5896708
+28,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GVJS,17052,94.3331807
+29,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GNT1S,16746,94.4433332
+30,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GNT2S,16443,94.5541467
+31,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GOBCS,8931,97.0436452
+32,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GSEBCS,15942,94.6903844
+33,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LOPENS,9308,96.9066937
+34,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LSCS,15485,94.8376426
+35,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LSTS,45930,84.2430574
+36,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LNT1S,20457,93.2139295
+37,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LNT3S,23863,92.0214155
+38,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LOBCS,9823,96.7545639
+39,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LSEBCS,15409,94.8397684
+40,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDOPENS,33711,88.6037289
+41,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDOBCS,49777,82.7778711
+42,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFOPENS,27598,90.7773660
+43,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFOBCS,36001,87.8152279
+44,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,TFWS,5518,98.1177725
+45,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDRSCS,46875,83.7529730
+46,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFROBCS,31634,89.3071786
+47,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,ORPHAN,40407,86.1764583
+48,1,01002,"Government College of Engineering, Amravati",0100224210,Computer Science and Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,EWS,13851,95.3932298
+49,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,GOPENS,12001,96.0264086
+50,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,GSCS,22810,92.4262209
+51,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,GSTS,57428,80.0615027
+52,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,GVJS,22090,92.6351162
+53,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,GNT1S,22548,92.5251996
+54,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,GNT2S,18106,93.9913601
+55,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,GNT3S,17692,94.1151780
+56,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,GOBCS,12727,95.8067495
+57,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,GSEBCS,18460,93.8710080
+58,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,LOPENS,11632,96.1687682
+59,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,LSCS,22774,92.4273158
+60,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,LSTS,62455,78.1496564
+61,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,LNT2S,20674,93.1131822
+62,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,LOBCS,12683,95.8198477
+63,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,LSEBCS,19600,93.4764585
+64,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDOPENS,84120,69.2652564
+65,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDOBCS,109674,57.0470967
+66,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFOPENS,33941,88.5539410
+67,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFOBCS,51336,82.1878954
+68,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,TFWS,9964,96.7229568
+69,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDRSCS,87457,67.6869909
+70,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFRNT1S,37872,87.1012785
+71,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,ORPHAN,100069,61.6354671
+72,1,01002,"Government College of Engineering, Amravati",0100224610,Information Technology,Government Autonomous Home University : Autonomous Institute,State Level,I,EWS,18299,93.9032684
+73,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GOPENS,28736,90.3847828
+74,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GSCS,42636,85.3822102
+75,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GSTS,109844,57.0470967
+76,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GVJS,40155,86.2190813
+77,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GNT2S,43440,85.1704164
+78,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GNT3S,64967,76.9332320
+79,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GOBCS,30164,89.8747850
+80,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,GSEBCS,47938,83.5369475
+81,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LOPENS,25978,91.2954950
+82,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LSCS,50448,82.7086811
+83,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LSTS,107619,57.4142590
+84,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LVJS,43053,85.2662319
+85,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LNT1S,34017,88.5172385
+86,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LOBCS,30050,89.8755527
+87,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,LSEBCS,61280,78.4507504
+88,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDOPENS,126496,47.0113809
+89,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,PWDOBCS,153875,27.5123271
+90,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFOPENS,48986,83.0327460
+91,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFOBCS,164128,18.5574725
+92,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,TFWS,27443,90.8058519
+93,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,DEFROBCS,82621,69.8003760
+94,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,ORPHAN,80761,70.5215521
+95,1,01002,"Government College of Engineering, Amravati",0100229310,Electrical Engineering,Government Autonomous Home University : Autonomous Institute,State Level,I,EWS,49718,82.7820291

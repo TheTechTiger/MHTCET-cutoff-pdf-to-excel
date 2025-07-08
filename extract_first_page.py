@@ -13,9 +13,11 @@ def extract_first_page_content(pdf_path, output_csv_path):
 
     extracted_data_rows = []
     serial_number = 0
-    header = ["Sr. No.","College Code","College Name","Course Code","Course Name","Status","Level","Stage","Caste_Category","Cutoff Rank","Cutoff Percentile"]
+    # Added "Page Number" to header
+    header = ["Sr. No.","Page Number","College Code","College Name","Course Code","Course Name","Status","Level","Stage","Caste_Category","Cutoff Rank","Cutoff Percentile"]
 
     try:
+        page_number_to_extract = 1 # For now, hardcoded to first page
         with open(pdf_path, 'rb') as f_pdf:
             reader = PyPDF2.PdfReader(f_pdf)
             if not reader.pages:
@@ -152,7 +154,9 @@ def extract_first_page_content(pdf_path, output_csv_path):
                         serial_number += 1
                         rank, percentile = actual_rank_percentiles[i]
                         row = [
-                            str(serial_number), current_college_code, current_college_name,
+                            str(serial_number),
+                            str(page_number_to_extract), # Added page number
+                            current_college_code, current_college_name,
                             current_course_code, current_course_name, current_status,
                             current_level, "I", category_code, rank, percentile
                         ]
