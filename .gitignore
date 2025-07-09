@@ -1,1 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
 venv/
+ENV/
+env/
+ENV.bak/
+venv.bak/
+
+# IDE configuration files
+.idea/
+.vscode/
+
+# Log files
+*.log
+
+# Generated output files (specific to this project)
+output_first_17_pages.csv
+debug_*.csv
+
+# Other common ignores
+*.DS_Store
+*.sqlite3
+*.db
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/node_modules
+/build
+/dist
