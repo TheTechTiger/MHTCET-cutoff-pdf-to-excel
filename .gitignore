@@ -15,11 +15,13 @@ venv.bak/
 .vscode/
 
 # Log files
-*.log
+data_extraction.log # Specific log file
+*.log # General logs
 
 # Generated output files (specific to this project)
-output_first_17_pages.csv
-debug_*.csv
+standalone_17_page_run_output.csv # Output from direct script run
+temp_actual_17_page_output.csv # Temporary output from test script
+debug_*.csv # Other debug outputs
 
 # Other common ignores
 *.DS_Store

@@ -4,11 +4,11 @@ import logging
 import csv
 import os
 
-logging.basicConfig(filename='first_page_extraction.log', level=logging.INFO,
+logging.basicConfig(filename='data_extraction.log', level=logging.INFO, # Changed log filename
                     format='%(asctime)s - %(levelname)s - %(message)s', filemode='w')
 
-def extract_first_page_content(pdf_path, output_csv_path, max_pages_to_process=1): # Added max_pages_to_process
-    logging.info(f"Starting regex-based extraction from PDF: {pdf_path} for {max_pages_to_process} page(s).")
+def extract_data_from_pdf(pdf_path, output_csv_path, max_pages_to_process=1): # Renamed function
+    logging.info(f"Starting PDF data extraction from: {pdf_path} for {max_pages_to_process} page(s).")
     logging.info(f"Output will be written to: {output_csv_path}")
 
     extracted_data_rows = []
@@ -329,16 +329,11 @@ def extract_first_page_content(pdf_path, output_csv_path, max_pages_to_process=1
 
 if __name__ == "__main__":
     pdf_file_path_main = "2024-Cutoff-Maharashtra.pdf"
-    # Focused testing for Stage II logic (e.g., page 2 has it)
-    # output_csv_path_main = "debug_stage2_output.csv"
-    # num_pages_to_process_main = 3 # Process pages 1-3 to include page 2 clearly
-
-    # For full 17-page run:
-    output_csv_path_main = "output_first_17_pages.csv"
+    output_csv_path_main = "standalone_17_page_run_output.csv" # New distinct output for direct runs
     num_pages_to_process_main = 17
 
     if not os.path.exists(pdf_file_path_main):
-        print(f"Test PDF file not found: {pdf_file_path_main}")
+        print(f"PDF file not found: {pdf_file_path_main}")
     else:
-        extract_first_page_content(pdf_file_path_main, output_csv_path_main, max_pages_to_process=num_pages_to_process_main)
-        print(f"Standalone run for {num_pages_to_process_main} pages. Output to {output_csv_path_main}. Check first_page_extraction.log for details.")
+        extract_data_from_pdf(pdf_file_path_main, output_csv_path_main, max_pages_to_process=num_pages_to_process_main) # Use new function name
+        print(f"Standalone run for {num_pages_to_process_main} pages. Output to {output_csv_path_main}. Check data_extraction.log for details.")
