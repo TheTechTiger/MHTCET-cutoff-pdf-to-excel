@@ -39,7 +39,8 @@ def extract_first_page_content(pdf_path, output_csv_path, max_pages_to_process=1
             course_re = re.compile(r"(\d{10})\s*-\s*(.+)")
             status_re = re.compile(r"Status:\s*(.+)")
             rank_percentile_re = re.compile(r"(\d+)\s*\(([\d.]+)\)")
-            data_line_detect_re = re.compile(r"^\s*I\s+(.*)")
+            stage1_data_line_detect_re = re.compile(r"^\s*I\s+(.*)") # For Stage I
+            stage2_data_line_detect_re = re.compile(r"^\s*II\s+(.*)") # For Stage II
 
             level_patterns = [
                 # Order matters: more specific patterns first
@@ -159,7 +160,7 @@ def extract_first_page_content(pdf_path, output_csv_path, max_pages_to_process=1
                             while temp_cat_line_idx < len(lines):
                                 potential_cat_line = lines[temp_cat_line_idx].strip()
                                 if not potential_cat_line or \
-                                   data_line_detect_re.match(potential_cat_line) or \
+                                   stage1_data_line_detect_re.match(potential_cat_line) or \
                                    college_re.match(potential_cat_line) or \
                                    course_re.match(potential_cat_line) or \
                                    status_re.match(potential_cat_line) or \
@@ -177,47 +178,70 @@ def extract_first_page_content(pdf_path, output_csv_path, max_pages_to_process=1
                             actual_category_codes = [code for code in category_codes_text.strip().split(' ') if code.isupper() and len(code)>1 and code != 'I']
                             logging.info(f"Page {current_page_num}, Course {current_course_name}, Level '{current_level}': Potential Categories: {actual_category_codes}")
 
-                            # Collect data values
-                            data_values_text = ""
+                            # Collect Stage I data
+                            stage1_data_text = ""
                             if line_idx < len(lines):
-                                initial_data_match = data_line_detect_re.match(lines[line_idx].strip())
-                                if initial_data_match:
-                                    data_values_text += " " + initial_data_match.group(1).strip()
+                                initial_stage1_match = stage1_data_line_detect_re.match(lines[line_idx].strip())
+                                if initial_stage1_match:
+                                    stage1_data_text += " " + initial_stage1_match.group(1).strip()
                                     line_idx += 1
-                                    while line_idx < len(lines): # Collect continuation data lines
-                                        potential_data_continuation_line = lines[line_idx].strip()
-                                        if potential_data_continuation_line and \
-                                           re.search(r'[\d\.\(\)]', potential_data_continuation_line) and \
-                                           not college_re.match(potential_data_continuation_line) and \
-                                           not course_re.match(potential_data_continuation_line) and \
-                                           not status_re.match(potential_data_continuation_line) and \
-                                           not any(lp.search(potential_data_continuation_line) for lp in level_patterns if len(lp.pattern) > 0.7 * len(potential_data_continuation_line) ) and \
-                                           potential_data_continuation_line != "Stage" and \
-                                           "Legends:" not in potential_data_continuation_line:
-                                            data_values_text += " " + potential_data_continuation_line
-                                            line_idx += 1
-                                        else:
+                                    # Collect Stage I continuation lines
+                                    while line_idx < len(lines):
+                                        line_content = lines[line_idx].strip()
+                                        # Stop if it's a Stage II line, new section, or not data-like
+                                        if stage2_data_line_detect_re.match(line_content) or \
+                                           college_re.match(line_content) or course_re.match(line_content) or \
+                                           status_re.match(line_content) or \
+                                           any(lp.search(line_content) for lp in level_patterns if len(lp.pattern) > 0.7 * len(line_content)) or \
+                                           line_content == "Stage" or "Legends:" in line_content or \
+                                           not (line_content and re.search(r'[\d\.\(\)]', line_content)):
                                             break
-                                else: # No initial data line starting with "I"
-                                    # If no categories were found either, this subsection is empty.
-                                    if not actual_category_codes:
-                                        logging.debug(f"Page {current_page_num}, Course {current_course_name}: No categories or initial data line found for this subsection with level '{current_level}'.")
-                                        break # Break from while True for subsections
+                                        stage1_data_text += " " + line_content
+                                        line_idx += 1
+                                else: # No initial Stage I line
+                                    if not actual_category_codes: # If no categories either, this subsection is empty
+                                        logging.debug(f"Page {current_page_num}, Course {current_course_name}: No categories or initial Stage I data line for level '{current_level}'.")
+                                        break # from subsection loop
 
-                            actual_rank_percentiles = rank_percentile_re.findall(data_values_text.strip())
-                            logging.info(f"Page {current_page_num}, Course {current_course_name}, Level '{current_level}': Ranks/Percentiles: {actual_rank_percentiles} from text: '{data_values_text}'")
+                            stage1_rp = rank_percentile_re.findall(stage1_data_text.strip())
+                            logging.info(f"Page {current_page_num}, Course {current_course_name}, Level '{current_level}': Stage I R/P: {stage1_rp} from text: '{stage1_data_text}'")
 
-                            if not actual_category_codes and not actual_rank_percentiles:
-                                # If this subsection yielded nothing, break from the subsection loop.
-                                # This might happen if we consumed a level header but then found no valid categories/data.
+                            # Collect Stage II data
+                            stage2_data_text = ""
+                            if line_idx < len(lines):
+                                initial_stage2_match = stage2_data_line_detect_re.match(lines[line_idx].strip())
+                                if initial_stage2_match:
+                                    stage2_data_text += " " + initial_stage2_match.group(1).strip()
+                                    line_idx += 1
+                                    # Collect Stage II continuation lines
+                                    while line_idx < len(lines):
+                                        line_content = lines[line_idx].strip()
+                                        # Stop if it's new section or not data-like
+                                        if college_re.match(line_content) or course_re.match(line_content) or \
+                                           status_re.match(line_content) or \
+                                           any(lp.search(line_content) for lp in level_patterns if len(lp.pattern) > 0.7 * len(line_content)) or \
+                                           line_content == "Stage" or "Legends:" in line_content or \
+                                           not (line_content and re.search(r'[\d\.\(\)]', line_content)):
+                                            break
+                                        stage2_data_text += " " + line_content
+                                        line_idx += 1
+
+                            stage2_rp = rank_percentile_re.findall(stage2_data_text.strip())
+                            logging.info(f"Page {current_page_num}, Course {current_course_name}, Level '{current_level}': Stage II R/P: {stage2_rp} from text: '{stage2_data_text}'")
+
+                            if not actual_category_codes and not stage1_rp and not stage2_rp:
                                 logging.debug(f"Page {current_page_num}, Course {current_course_name}: Empty subsection after level '{current_level}'. Breaking subsection loop.")
-                                break
+                                break # from subsection loop if no data at all for this subsection
 
+                            # Generate rows based on sequential assignment from Stage I then Stage II data
+                            cat_proc_idx = 0 # Index for actual_category_codes
 
-                            for i, category_code in enumerate(actual_category_codes):
-                                if i < len(actual_rank_percentiles):
+                            # Process Stage I data
+                            for s1_idx in range(len(stage1_rp)):
+                                if cat_proc_idx < len(actual_category_codes):
                                     serial_number += 1
-                                    rank, percentile = actual_rank_percentiles[i]
+                                    rank, percentile = stage1_rp[s1_idx]
+                                    category_code = actual_category_codes[cat_proc_idx]
                                     row = [
                                         str(serial_number), str(current_page_num),
                                         current_college_code, current_college_name,
@@ -225,12 +249,37 @@ def extract_first_page_content(pdf_path, output_csv_path, max_pages_to_process=1
                                         current_level, "I", category_code, rank, percentile
                                     ]
                                     extracted_data_rows.append(row)
-                                    logging.debug(f"Page {current_page_num}: Added row: {row}")
+                                    logging.debug(f"Page {current_page_num}: Added Stage I row: {row}")
+                                    cat_proc_idx += 1
                                 else:
-                                    logging.warning(f"Page {current_page_num}, Course {current_course_name}, Level '{current_level}': Mismatched data: Cat: {category_code}, but not enough R/P pairs.")
+                                    logging.warning(f"Page {current_page_num}, Course {current_course_name}, Level '{current_level}': More Stage I R/P pairs than categories. Index: {cat_proc_idx}")
+                                    break
 
-                            # Check if the next line indicates a start of a new structure (college, course, or even a new level for a new subsection)
-                            # or if it's the end of the page lines.
+                            # Process Stage II data for remaining categories
+                            for s2_idx in range(len(stage2_rp)):
+                                if cat_proc_idx < len(actual_category_codes):
+                                    serial_number += 1
+                                    rank, percentile = stage2_rp[s2_idx]
+                                    category_code = actual_category_codes[cat_proc_idx]
+                                    row = [
+                                        str(serial_number), str(current_page_num),
+                                        current_college_code, current_college_name,
+                                        current_course_code, current_course_name, current_status,
+                                        current_level, "II", category_code, rank, percentile
+                                    ]
+                                    extracted_data_rows.append(row)
+                                    logging.debug(f"Page {current_page_num}: Added Stage II row: {row}")
+                                    cat_proc_idx += 1
+                                else:
+                                    logging.warning(f"Page {current_page_num}, Course {current_course_name}, Level '{current_level}': More Stage II R/P pairs than remaining categories. Index: {cat_proc_idx}")
+                                    break
+
+                            if cat_proc_idx < len(actual_category_codes) and (stage1_rp or stage2_rp): # Check if any data was processed for these categories
+                                 logging.warning(f"Page {current_page_num}, Course {current_course_name}, Level '{current_level}': Not all categories were assigned data. Total Cats: {len(actual_category_codes)}, Processed Cats: {cat_proc_idx}")
+
+                            # After processing a subsection (categories + its Stage I/II data):
+                            # Decide whether to continue for another subsection of the SAME course
+                            # or break to find a new course/college.
                             if line_idx >= len(lines) or \
                                college_re.match(lines[line_idx].strip()) or \
                                course_re.match(lines[line_idx].strip()):
@@ -239,7 +288,7 @@ def extract_first_page_content(pdf_path, output_csv_path, max_pages_to_process=1
                             # If the next line is not a new Level header for a *new* subsection, break.
                             # This is tricky: how to know if the next line is a new level for the *same* course or start of something else?
                             # For now, if there are no more data lines starting with "I " immediately after current data, assume end of subsections for this course.
-                            if not data_line_detect_re.match(lines[line_idx].strip()) and \
+                            if not stage1_data_line_detect_re.match(lines[line_idx].strip()) and \
                                not any(level_re.search(lines[line_idx].strip()) for level_re in level_patterns):
                                 break # Break from while True (subsections) if next line isn't data or a new level.
 
@@ -280,14 +329,13 @@ def extract_first_page_content(pdf_path, output_csv_path, max_pages_to_process=1
 
 if __name__ == "__main__":
     pdf_file_path_main = "2024-Cutoff-Maharashtra.pdf"
-    # For iterative testing of Level detection, focus on a few key pages
-    # output_csv_path_main = "debug_level_test_output.csv"
-    # num_pages_to_process_main = 6 # Process up to page 6 to see variations
+    # Focused testing for Stage II logic (e.g., page 2 has it)
+    # output_csv_path_main = "debug_stage2_output.csv"
+    # num_pages_to_process_main = 3 # Process pages 1-3 to include page 2 clearly
 
     # For full 17-page run:
     output_csv_path_main = "output_first_17_pages.csv"
     num_pages_to_process_main = 17
-
 
     if not os.path.exists(pdf_file_path_main):
         print(f"Test PDF file not found: {pdf_file_path_main}")
