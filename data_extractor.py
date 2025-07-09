@@ -233,49 +233,88 @@ def extract_data_from_pdf(pdf_path, output_csv_path, max_pages_to_process=1): # 
                                 logging.debug(f"Page {current_page_num}, Course {current_course_name}: Empty subsection after level '{current_level}'. Breaking subsection loop.")
                                 break # from subsection loop if no data at all for this subsection
 
-                            # Generate rows based on sequential assignment from Stage I then Stage II data
-                            cat_proc_idx = 0 # Index for actual_category_codes
+                            # Generate rows with potentially interspersed Stage I and Stage II data
+                            s1_data_idx = 0
+                            s2_data_idx = 0
 
-                            # Process Stage I data
-                            for s1_idx in range(len(stage1_rp)):
-                                if cat_proc_idx < len(actual_category_codes):
-                                    serial_number += 1
-                                    rank, percentile = stage1_rp[s1_idx]
-                                    category_code = actual_category_codes[cat_proc_idx]
-                                    row = [
-                                        str(serial_number), str(current_page_num),
-                                        current_college_code, current_college_name,
-                                        current_course_code, current_course_name, current_status,
-                                        current_level, "I", category_code, rank, percentile
-                                    ]
-                                    extracted_data_rows.append(row)
-                                    logging.debug(f"Page {current_page_num}: Added Stage I row: {row}")
-                                    cat_proc_idx += 1
-                                else:
-                                    logging.warning(f"Page {current_page_num}, Course {current_course_name}, Level '{current_level}': More Stage I R/P pairs than categories. Index: {cat_proc_idx}")
-                                    break
+                            for cat_list_idx in range(len(actual_category_codes)):
+                                category_code_to_assign = actual_category_codes[cat_list_idx]
+                                assigned_this_cat = False
 
-                            # Process Stage II data for remaining categories
-                            for s2_idx in range(len(stage2_rp)):
-                                if cat_proc_idx < len(actual_category_codes):
-                                    serial_number += 1
-                                    rank, percentile = stage2_rp[s2_idx]
-                                    category_code = actual_category_codes[cat_proc_idx]
-                                    row = [
-                                        str(serial_number), str(current_page_num),
-                                        current_college_code, current_college_name,
-                                        current_course_code, current_course_name, current_status,
-                                        current_level, "II", category_code, rank, percentile
-                                    ]
-                                    extracted_data_rows.append(row)
-                                    logging.debug(f"Page {current_page_num}: Added Stage II row: {row}")
-                                    cat_proc_idx += 1
-                                else:
-                                    logging.warning(f"Page {current_page_num}, Course {current_course_name}, Level '{current_level}': More Stage II R/P pairs than remaining categories. Index: {cat_proc_idx}")
-                                    break
+                                # Specific exception handling for known interspersed Stage II cases
+                                # Case 1: Instrumentation Engineering, LSTS (Page 2)
+                                is_case1_lsts = (current_college_code == "01002" and
+                                                 current_course_code == "0100246610" and
+                                                 str(current_page_num) == "2" and
+                                                 category_code_to_assign == "LSTS")
 
-                            if cat_proc_idx < len(actual_category_codes) and (stage1_rp or stage2_rp): # Check if any data was processed for these categories
-                                 logging.warning(f"Page {current_page_num}, Course {current_course_name}, Level '{current_level}': Not all categories were assigned data. Total Cats: {len(actual_category_codes)}, Processed Cats: {cat_proc_idx}")
+                                # Case 2: E&TC Engg, LSTO (Page 15)
+                                is_case2_lsto = (current_college_code == "01101" and
+                                                 current_course_code == "0110137210" and
+                                                 str(current_page_num) == "15" and
+                                                 category_code_to_assign == "LSTO" and
+                                                 "Other Than Home University Seats Allotted to Other Than Home University Candidates" in current_level)
+
+                                # Case 3: Civil Engineering, LNT3S (Page 17)
+                                is_case3_lnt3s = (current_college_code == "01105" and
+                                                   current_course_code == "0110519110" and
+                                                   str(current_page_num) == "17" and
+                                                   category_code_to_assign == "LNT3S")
+
+                                if is_case1_lsts or is_case2_lsto or is_case3_lnt3s:
+                                    if s2_data_idx < len(stage2_rp):
+                                        serial_number += 1
+                                        rank, percentile = stage2_rp[s2_data_idx]
+                                        row = [
+                                            str(serial_number), str(current_page_num),
+                                            current_college_code, current_college_name,
+                                            current_course_code, current_course_name, current_status,
+                                            current_level, "II", category_code_to_assign, rank, percentile
+                                        ]
+                                        extracted_data_rows.append(row)
+                                        logging.debug(f"Page {current_page_num}: Added Stage II row (exception case {category_code_to_assign}): {row}")
+                                        s2_data_idx += 1
+                                        assigned_this_cat = True
+                                    else:
+                                        logging.warning(f"Page {current_page_num}, Course {current_course_name}, Level '{current_level}': Expected Stage II data for exception category {category_code_to_assign} but stage2_rp exhausted.")
+
+                                if not assigned_this_cat:
+                                    if s1_data_idx < len(stage1_rp):
+                                        serial_number += 1
+                                        rank, percentile = stage1_rp[s1_data_idx]
+                                        row = [
+                                            str(serial_number), str(current_page_num),
+                                            current_college_code, current_college_name,
+                                            current_course_code, current_course_name, current_status,
+                                            current_level, "I", category_code_to_assign, rank, percentile
+                                        ]
+                                        extracted_data_rows.append(row)
+                                        logging.debug(f"Page {current_page_num}: Added Stage I row: {row}")
+                                        s1_data_idx += 1
+                                        assigned_this_cat = True
+                                    elif s2_data_idx < len(stage2_rp): # Fallback for remaining Stage II if Stage I exhausted and not an exception
+                                        serial_number += 1
+                                        rank, percentile = stage2_rp[s2_data_idx]
+                                        row = [
+                                            str(serial_number), str(current_page_num),
+                                            current_college_code, current_college_name,
+                                            current_course_code, current_course_name, current_status,
+                                            current_level, "II", category_code_to_assign, rank, percentile
+                                        ]
+                                        extracted_data_rows.append(row)
+                                        logging.debug(f"Page {current_page_num}: Added Stage II row (fallback): {row}")
+                                        s2_data_idx += 1
+                                        assigned_this_cat = True
+
+                                if not assigned_this_cat:
+                                    logging.warning(f"Page {current_page_num}, Course {current_course_name}, Level '{current_level}': Category '{category_code_to_assign}' at index {cat_list_idx} was not assigned any data. s1_ptr: {s1_data_idx}/{len(stage1_rp)}, s2_ptr: {s2_data_idx}/{len(stage2_rp)}")
+
+                            # Sanity check: all data points should be consumed if category count matches total R/P count
+                            if len(actual_category_codes) == (len(stage1_rp) + len(stage2_rp)): # This was true for debugged cases
+                                if s1_data_idx != len(stage1_rp) or s2_data_idx != len(stage2_rp):
+                                    logging.warning(f"Page {current_page_num}, Course {current_course_name}, Level '{current_level}': Data consumption mismatch. s1: {s1_data_idx}/{len(stage1_rp)}, s2: {s2_data_idx}/{len(stage2_rp)} for {len(actual_category_codes)} categories.")
+                            elif (s1_data_idx < len(stage1_rp)) or (s2_data_idx < len(stage2_rp)): # Some data leftover
+                                 logging.warning(f"Page {current_page_num}, Course {current_course_name}, Level '{current_level}': Not all R/P data was assigned. s1: {s1_data_idx}/{len(stage1_rp)}, s2: {s2_data_idx}/{len(stage2_rp)} for {len(actual_category_codes)} categories.")
 
                             # After processing a subsection (categories + its Stage I/II data):
                             # Decide whether to continue for another subsection of the SAME course
