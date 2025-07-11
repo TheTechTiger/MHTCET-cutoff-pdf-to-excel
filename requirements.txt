@@ -1,3 +1,2 @@
 PyPDF2==3.0.1
 pdfplumber>=0.10.0
-# Using >=0.10.0 for recent features, adjust if specific version needed
