@@ -4,24 +4,17 @@ import csv
 import logging
 import os
 import re
-import sys
 from hashlib import md5
 from pathlib import Path
 
+import click
 import pdfplumber
 import PyPDF2
 
-LOG_FILE = "data_extraction.log"
-logging.basicConfig(
-    filename=LOG_FILE,
-    level=logging.INFO,
-    format="%(asctime)s – %(levelname)s – %(message)s",
-    filemode="w",
-)
+# ------------------------------------------------------------------------------
+# Regex patterns
+# ------------------------------------------------------------------------------
 
-# ---------------------------------------------------------------------------
-# Regex patterns -------------------------------------------------------------
-# ---------------------------------------------------------------------------
 COLLEGE_RE = re.compile(r"(\d{5})\s*-\s*(.+)")
 COURSE_RE = re.compile(r"(\d{10})\s*-\s*(.+)")
 STATUS_RE = re.compile(r"Status:\s*(.+)")
@@ -49,14 +42,12 @@ SKIP_LINES = {
     "Maharashtra State Seats - Cut Off Indicates Maharashtra State General Merit No.; Figures in bracket Indicates Merit Percentile.",
 }
 
-# ---------------------------------------------------------------------------
-# Helpers --------------------------------------------------------------------
-# ---------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# Utility Functions
+# ------------------------------------------------------------------------------
 
 def table_fingerprint(table_rows: list[list[str | None]]) -> str:
-    """Return a stable hash representing the *content* of the first two rows.
-    That is enough to identify duplicate tables printed multiple times.
-    """
+    """Generate a stable MD5 hash of the first two non-empty rows of a table."""
     key = []
     for row in table_rows[:2]:
         if any(cell not in (None, "") for cell in row):
@@ -64,17 +55,98 @@ def table_fingerprint(table_rows: list[list[str | None]]) -> str:
     digest = md5(str(tuple(key)).encode()).hexdigest()
     return digest
 
+def configure_logging(log_file: Path) -> None:
+    """Configure logging for the current extraction session."""
+    logging.basicConfig(
+        filename=str(log_file),
+        level=logging.INFO,
+        format="%(asctime)s – %(levelname)s – %(message)s",
+        filemode="w",
+    )
 
-# ---------------------------------------------------------------------------
-# Core function --------------------------------------------------------------
-# ---------------------------------------------------------------------------
+def write_csv(output_csv: Path, header: list[str], rows: list[list[str]]) -> None:
+    """Write the extracted data rows to a CSV file."""
+    with open(output_csv, "w", newline="", encoding="utf-8") as fh:
+        writer = csv.writer(fh, lineterminator="\n")
+        writer.writerow(header)
+        writer.writerows(rows)
 
-def extract_data_from_pdf(
-    pdf_path: str | os.PathLike,
-    output_csv: str | os.PathLike,
-    max_pages: int | None = None,
-) -> None:
-    """Harvests cut‑off tables and writes *output_csv* (always with a header)."""
+# ------------------------------------------------------------------------------
+# Table Processing Logic
+# ------------------------------------------------------------------------------
+
+def _process_table(
+    table: list[list[str | None]],
+    header_cols: list[str],
+    out_rows: list[list[str]],
+    serial_start: int,
+    page_num: int,
+    college_code: str,
+    college_name: str,
+    course_code: str,
+    course_name: str,
+    status: str,
+    level: str,
+) -> int:
+    """Process a single table and extract rank/percentile rows."""
+    serial = serial_start
+    table = [r for r in table if any(c not in (None, "") for c in r)]
+    if not table:
+        return serial
+
+    header_row = table[0]
+    if (
+        len(header_row) < 2
+        or not any(re.search(r"[A-Za-z]", str(c or "")) for c in header_row)
+    ):
+        logging.debug("Page %d: unable to identify header row, skipping table", page_num)
+        return serial
+
+    header_norm = [" ".join(str(c or "").split()) for c in header_row]
+    category_offset = 1 if header_norm[0].upper() in {"STAGE", ""} else 0
+
+    for row in table[1:]:
+        cells = [" ".join(str(c or "").split()) for c in row]
+        if not cells or not any(cells):
+            continue
+        stage = cells[0].upper()
+        for idx, cell in enumerate(cells[1:], start=1):
+            if not cell or cell == "-":
+                continue
+            m = RANK_PERC_RE.search(cell)
+            if not m:
+                continue
+            rank, perc = m.groups()
+            hdr_idx = idx - 1 + category_offset
+            if hdr_idx >= len(header_norm):
+                continue
+            category = header_norm[hdr_idx]
+            serial += 1
+            out_rows.append([
+                str(serial),
+                str(page_num),
+                college_code,
+                college_name,
+                course_code,
+                course_name,
+                status,
+                level,
+                stage,
+                category,
+                rank,
+                perc,
+            ])
+    return serial
+
+# ------------------------------------------------------------------------------
+# PDF Extraction Core Logic
+# ------------------------------------------------------------------------------
+
+def extract_data_from_pdf(pdf_path: Path, output_csv: Path, log_file: Path, max_pages: int | None = None) -> None:
+    """
+    Main function to extract tabular data from a structured PDF and output CSV.
+    """
+    configure_logging(log_file)
 
     header = [
         "Sr. No.",
@@ -105,75 +177,55 @@ def extract_data_from_pdf(
             logging.info("Processing %s / %s pages", pages_to_process, n_pages)
 
             seen_tables: set[str] = set()
-            current_level = "State Level"  # sensible default
+            current_level = "State Level"
             current_college_code = current_college_name = ""
             current_course_code = current_course_name = ""
             current_status = ""
 
-            # ----------------------------------------------------------------
             for pg in range(pages_to_process):
                 page_num = pg + 1
                 logging.info("— Page %d —", page_num)
                 pypdf_text = reader.pages[pg].extract_text() or ""
                 lines = [ln.strip() for ln in pypdf_text.split("\n") if ln.strip() and ln.strip() not in SKIP_LINES]
 
-                # We need to know after *each* level‑header which table is next,
-                # so we iterate line‑by‑line and check the pdfplumber tables lazily.
-                line_idx = 0
                 plumber_page = pl.pages[pg]
                 all_tables = plumber_page.extract_tables() or []
-                table_cursor = 0  # points at next unprocessed table in all_tables
+                table_cursor = 0
 
+                line_idx = 0
                 while line_idx < len(lines):
                     ln = lines[line_idx]
-
-                    # 1️⃣ Level header? ----------------------------------------------------
                     for lvl_re in LEVEL_PATTERNS:
                         if lvl_re.search(ln):
-                            current_level = " ".join(lvl_re.pattern.split())  # cleaned literal pattern
+                            current_level = " ".join(lvl_re.pattern.split())
                             logging.info("Page %d: Level ➜ %s", page_num, current_level)
-
-                            # Immediately harvest the *next* table once for this level.
                             if table_cursor < len(all_tables):
                                 tbl = all_tables[table_cursor]
                                 table_cursor += 1
                                 fp = table_fingerprint(tbl)
                                 if fp in seen_tables:
                                     logging.debug("Page %d: duplicate table skipped", page_num)
-                                    break  # out of lvl_re loop
+                                    break
                                 seen_tables.add(fp)
                                 serial = _process_table(
-                                    tbl,
-                                    header,
-                                    rows,
-                                    serial,
-                                    page_num,
-                                    current_college_code,
-                                    current_college_name,
-                                    current_course_code,
-                                    current_course_name,
-                                    current_status,
-                                    current_level,
+                                    tbl, header, rows, serial, page_num,
+                                    current_college_code, current_college_name,
+                                    current_course_code, current_course_name,
+                                    current_status, current_level
                                 )
-                            break  # done with level patterns for this line
+                            break
                     else:
-                        # 2️⃣ College line? ------------------------------------------------
                         if (m := COLLEGE_RE.match(ln)):
                             current_college_code, current_college_name = m.groups()
                             logging.info("Page %d: College ➜ %s – %s", page_num, current_college_code, current_college_name)
-                            # reset course‑specific fields
                             current_course_code = current_course_name = current_status = ""
-                        # 3️⃣ Course line? -------------------------------------------------
                         elif (m := COURSE_RE.match(ln)):
                             current_course_code, current_course_name = m.groups()
                             logging.info("Page %d: Course ➜ %s – %s", page_num, current_course_code, current_course_name)
-                            # look ahead one line for Status
                             if line_idx + 1 < len(lines) and (m2 := STATUS_RE.match(lines[line_idx + 1])):
                                 current_status = " ".join(m2.group(1).split())
-                                line_idx += 1  # consume the status line
+                                line_idx += 1
                                 logging.info("Page %d: Status ➜ %s", page_num, current_status)
-                        # 4️⃣ nothing interesting -----------------------------------------
-
                     line_idx += 1
 
     except FileNotFoundError:
@@ -181,107 +233,33 @@ def extract_data_from_pdf(
     except Exception as exc:
         logging.exception("Unexpected error: %s", exc)
 
-    # Always write the CSV (even if empty)
-    with open(output_csv, "w", newline="", encoding="utf-8") as fh:
-        w = csv.writer(fh, lineterminator="\n")
-        w.writerow(header)
-        w.writerows(rows)
+    write_csv(output_csv, header, rows)
     print(f"✔ Extraction finished – {len(rows)} rows written to {output_csv}")
 
+# ------------------------------------------------------------------------------
+# Directory Traversal
+# ------------------------------------------------------------------------------
 
-# ---------------------------------------------------------------------------
-# Row‑harvest helper ---------------------------------------------------------
-# ---------------------------------------------------------------------------
+def process_folder(folder: Path, max_pages: int | None = None) -> None:
+    """
+    Recursively traverse folder for PDFs and extract tables into CSVs and logs.
+    """
+    for path in folder.rglob("*.pdf"):
+        output_csv = path.with_suffix(".csv")
+        log_file = path.with_name(path.stem + ".log")
+        print(f"→ Processing: {path}")
+        extract_data_from_pdf(path, output_csv, log_file, max_pages)
 
-def _process_table(
-    table: list[list[str | None]],
-    header_cols: list[str],
-    out_rows: list[list[str]],
-    serial_start: int,
-    page_num: int,
-    college_code: str,
-    college_name: str,
-    course_code: str,
-    course_name: str,
-    status: str,
-    level: str,
-) -> int:
-    """Convert *table* rows into CSV rows. Returns the new serial counter."""
+# ------------------------------------------------------------------------------
+# Click CLI Interface
+# ------------------------------------------------------------------------------
 
-    serial = serial_start
-
-    # Clean blank rows
-    table = [r for r in table if any(c not in (None, "") for c in r)]
-    if not table:
-        return serial
-
-    header_row = table[0]
-
-    # Heuristic: header row must have at least two non‑blank cells and the first
-    # cell should *not* be "I"/"II" (that would mean this is already data).
-    if (
-        len(header_row) < 2
-        or str(header_row[0]).strip().upper() in {"I", "II"}
-        or not any(re.search(r"[A-Za-z]", str(c or "")) for c in header_row)
-    ):
-        logging.debug("Page %d: unable to identify header row, skipping table", page_num)
-        return serial
-
-    # Normalise header: squeeze whitespace, drop newline chars
-    header_norm = [" ".join(str(c or "").split()) for c in header_row]
-
-    category_offset = 1 if header_norm[0].upper() in {"STAGE", ""} else 0
-
-    for row in table[1:]:
-        cells = [" ".join(str(c or "").split()) for c in row]
-        if not cells or not any(cells):
-            continue
-        stage = cells[0].upper()
-        # if stage not in {"I", "II"}:
-        #     continue
-        for idx, cell in enumerate(cells[1:], start=1):
-            if not cell or cell == "-":
-                continue
-            m = RANK_PERC_RE.search(cell)
-            if not m:
-                continue
-            rank, perc = m.groups()
-            hdr_idx = idx - 1 + category_offset
-            if hdr_idx >= len(header_norm):
-                continue
-            category = header_norm[hdr_idx]
-            serial += 1
-            out_rows.append(
-                [
-                    str(serial),
-                    str(page_num),
-                    college_code,
-                    college_name,
-                    course_code,
-                    course_name,
-                    status,
-                    level,
-                    stage,
-                    category,
-                    rank,
-                    perc,
-                ]
-            )
-    return serial
-
-
-# ---------------------------------------------------------------------------
-# CLI wrapper ---------------------------------------------------------------
-# ---------------------------------------------------------------------------
+@click.command()
+@click.argument("folder", type=click.Path(exists=True, file_okay=False, path_type=Path))
+@click.option("--max-pages", "-n", type=int, default=None, help="Maximum number of pages to process per PDF.")
+def main(folder: Path, max_pages: int | None) -> None:
+    """Extract admission cutoff data from all PDFs in the FOLDER recursively."""
+    process_folder(folder, max_pages)
 
 if __name__ == "__main__":
-    # Arguments:  [pdf] [csv] [n_pages]
-    pdf_path = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("CAP_III.pdf")
-    csv_out = Path(sys.argv[2]) if len(sys.argv) > 2 else Path("cutoff_output_III.csv")
-    pages = int(sys.argv[3]) if len(sys.argv) > 3 else None
-
-    if not pdf_path.exists():
-        print(f"✘ PDF not found: {pdf_path}")
-        sys.exit(1)
-
-    extract_data_from_pdf(str(pdf_path), str(csv_out), pages)
+    main()
