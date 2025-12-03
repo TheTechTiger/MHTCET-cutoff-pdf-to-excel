@@ -73,3 +73,5 @@ The script uses the `pdfplumber` and `PyPDF2` libraries to open and read PDF fil
 A fingerprinting mechanism for tables helps in avoiding the processing of redundant table data that might appear multiple times (e.g., headers repeated on new pages without actual new data rows immediately following).
 
 The extracted data is then structured and written to a CSV file, and operational logs are saved to a corresponding log file.
+
+## Create personilised college list under 7 minutes using MHTCET-cutoff-pdf-to-excel and Excel: https://bit.ly/akhi-spedRunMHTCETgd
